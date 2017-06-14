@@ -79,13 +79,15 @@ static mrb_value mrb_bsdspi_setclk(mrb_state *mrb, mrb_value self)
   return mrb_fixnum_value(clk);
 }
 
+#define MAXBUF 1024
+
 static mrb_value mrb_bsdspi_transfer(mrb_state *mrb, mrb_value self)
 {
   mrb_bsdspi_data *data = DATA_PTR(self);
   struct spigen_transfer cmd;
   int error;
-  unsigned char txbuf[32];
-  unsigned char rxbuf[32];
+  unsigned char txbuf[MAXBUF];
+  unsigned char rxbuf[MAXBUF];
   int len;
   mrb_value arr;
   mrb_value res;
@@ -94,7 +96,7 @@ static mrb_value mrb_bsdspi_transfer(mrb_state *mrb, mrb_value self)
 
   mrb_get_args(mrb, "Ai", &arr, &rxsize);
   len = RARRAY_LEN( arr );
-  if (len > 32 || rxsize > 32) {
+  if (len > MAXBUF || rxsize > MAXBUF) {
     return mrb_fixnum_value(0);
   }
   for (i = 0; i < len; ++i)
