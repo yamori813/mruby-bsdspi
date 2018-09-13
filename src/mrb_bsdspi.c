@@ -49,7 +49,7 @@ static mrb_value mrb_bsdspi_init(mrb_state *mrb, mrb_value self)
 
   mrb_get_args(mrb, "i", &num);
   data = (mrb_bsdspi_data *)mrb_malloc(mrb, sizeof(mrb_bsdspi_data));
-  snprintf(device, sizeof(device), "/dev/spigen%u", num);
+  snprintf(device, sizeof(device), "/dev/spigen%u.0", num);
   data->fd = open(device, O_RDWR);
   DATA_PTR(self) = data;
 
