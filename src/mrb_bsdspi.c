@@ -121,7 +121,7 @@ void mrb_mruby_bsdspi_gem_init(mrb_state *mrb)
   struct RClass *bsdspi;
   bsdspi = mrb_define_class(mrb, "BsdSpi", mrb->object_class);
   mrb_define_method(mrb, bsdspi, "initialize", mrb_bsdspi_init, MRB_ARGS_REQ(1));
-  mrb_define_method(mrb, bsdspi, "transfer", mrb_bsdspi_transfer, MRB_ARGS_REQ(1));
+  mrb_define_method(mrb, bsdspi, "transfer", mrb_bsdspi_transfer, MRB_ARGS_REQ(2));
   mrb_define_method(mrb, bsdspi, "getclk", mrb_bsdspi_getclk, MRB_ARGS_NONE());
   mrb_define_method(mrb, bsdspi, "setclk", mrb_bsdspi_setclk, MRB_ARGS_REQ(1));
   DONE;
